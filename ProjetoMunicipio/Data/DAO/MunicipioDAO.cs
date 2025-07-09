@@ -1,4 +1,6 @@
-﻿using ProjetoMunicipio.Model;
+﻿using ProjetoMunicipio.DTOs;
+using ProjetoMunicipio.Model;
+using ProjetoMunicipio.Specifications;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +28,9 @@ namespace ProjetoMunicipio.Data.DAO
             _contexto.Municipios
                 .Where(m => m.Capital)
                 .ToList();
+
+        public List<Municipio> GetTodosMunicipios() =>
+            _contexto.Municipios.ToList();
     }
 
 }
