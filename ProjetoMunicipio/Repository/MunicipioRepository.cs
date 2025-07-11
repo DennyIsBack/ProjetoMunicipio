@@ -1,5 +1,6 @@
 ﻿using ProjetoMunicipio.Data.DAO;
 using ProjetoMunicipio.Model;
+using ProjetoMunicipio.Specifications;
 
 namespace ProjetoMunicipio.Repository
 {
@@ -16,5 +17,8 @@ namespace ProjetoMunicipio.Repository
 
         public List<Municipio> ListarCapitais() =>
             _dao.GetCapitais();
+
+        public List<Municipio> ObterTodos() =>
+            _dao.GetTodosMunicipios();
     }
 }
