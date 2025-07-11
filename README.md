@@ -50,9 +50,6 @@ ProjetoMunicipio/
 
 ## 🧱 Camadas e Responsabilidades
 
-### 📁 Controllers/
-- `MunicipioController.cs`  
-  Controlador para organização modular.
 
 ### 📁 Data/DAO/
 - `MunicipioDAO.cs`  
