@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProjetoMunicipio.Model
 {
-    [Table("municipio")]
+    [Table("municipios_ibge")]
     public class Municipio
     {
         [Column("cod_munic")]
@@ -15,13 +15,16 @@ namespace ProjetoMunicipio.Model
         [Column("cod_uf")]
         public int CodUf { get; set; }
 
-        [Column("nome_do_municipio")]
+        [Column("nome_municipio")]
         public string NomeDoMunicipio { get; set; }
 
-        [Column("capital")]
-        public bool Capital { get; set; }
+        [Column("capital_estado")]
+        public string CapitalEstado { get; set; }
 
         [Column("populacao")]
-        public int Populacao { get; set; }
+        public long Populacao { get; set; }
+
+        [NotMapped]
+        public bool Capital => CapitalEstado?.Equals(" Sim", StringComparison.OrdinalIgnoreCase) == true;
     }
 }

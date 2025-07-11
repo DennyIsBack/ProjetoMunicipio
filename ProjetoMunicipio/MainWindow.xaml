@@ -5,66 +5,144 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:ProjetoMunicipio.ViewModels"
         mc:Ignorable="d"
-        Title="Municípios" Height="450" Width="800">
+        Title="Municípios" Height="710" Width="865">
 
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
 
-    <Grid Margin="10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="10">
 
-        <!-- 1) Buscar por nome -->
-        <GroupBox Header="Buscar Município" Grid.Row="0" Margin="0,0,0,10" Padding="8">
-            <StackPanel Orientation="Horizontal">
-                <TextBox Width="200"
-                 Text="{Binding NomeBusca, UpdateSourceTrigger=PropertyChanged}"
-                 Margin="0,0,8,0"/>
-                <Button Content="Buscar"
-                Command="{Binding BuscarPorNomeCmd}"
-                Margin="0,0,8,0"/>
-                <TextBlock Text="{Binding MuniEncontrado.NomeDoMunicipio}"/>
-            </StackPanel>
-        </GroupBox>
+            <!-- 1) Buscar por nome -->
+            <GroupBox Header="1) Buscar Município por Nome" Margin="0,0,0,10">
+                <StackPanel Orientation="Horizontal" Margin="8">
+                    <TextBox Width="200"
+                             Text="{Binding NomeBusca, UpdateSourceTrigger=PropertyChanged}"
+                             Margin="0,0,8,0"/>
+                    <Button Content="Buscar"
+                            Command="{Binding BuscarPorNomeCmd}"
+                            Margin="0,0,8,0"/>
+                    <TextBlock Text="{Binding NomeEncontradoDisplay}"
+                               VerticalAlignment="Center"/>
+                </StackPanel>
+            </GroupBox>
 
-        <!-- 2) População por UF -->
-        <GroupBox Header="População por Estado" Grid.Row="1" Margin="0,0,0,10" Padding="8">
-            <StackPanel Orientation="Horizontal">
-                <TextBox Width="50"
-                 Text="{Binding UfBusca, UpdateSourceTrigger=PropertyChanged}"
-                 Margin="0,0,8,0"/>
-                <Button Content="Calcular"
-                Command="{Binding BuscarPopUfCmd}"
-                Margin="0,0,8,0"/>
-                <TextBlock Text="{Binding PopulacaoTotal}"/>
-            </StackPanel>
-        </GroupBox>
+            <!-- 2) População por UF -->
+            <GroupBox Header="2) População Total por Estado" Margin="0,0,0,10">
+                <StackPanel Orientation="Horizontal" Margin="8">
+                    <TextBox Width="50"
+                             Text="{Binding UfBusca, UpdateSourceTrigger=PropertyChanged}"
+                             Margin="0,0,8,0"/>
+                    <Button Content="Calcular"
+                            Command="{Binding BuscarPopUfCmd}"
+                            Margin="0,0,8,0"/>
+                    <TextBlock Text="{Binding PopulacaoTotal}"
+                               VerticalAlignment="Center"/>
+                </StackPanel>
+            </GroupBox>
 
-        <!-- 3) Listar Capitais -->
-        <GroupBox Header="Capitais" Grid.Row="2" Padding="8">
-            <DockPanel>
-                <Button Content="Atualizar"
-                Command="{Binding ListarCapitaisCmd}"
-                DockPanel.Dock="Top"
-                Margin="0,0,0,8"/>
-                <DataGrid ItemsSource="{Binding Capitais}"
-                  AutoGenerateColumns="False"
-                  IsReadOnly="True">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Município"
-                                Binding="{Binding NomeDoMunicipio}"/>
-                        <DataGridTextColumn Header="UF"
-                                Binding="{Binding Uf}"/>
-                        <DataGridTextColumn Header="População"
-                                Binding="{Binding Populacao}"/>
-                    </DataGrid.Columns>
-                </DataGrid>
-            </DockPanel>
-        </GroupBox>
+            <!-- 3) Listar Capitais -->
+            <GroupBox Header="3) Listar Capitais" Margin="0,0,0,10">
+                <DockPanel Margin="8">
+                    <Button Content="Atualizar"
+                            Command="{Binding ListarCapitaisCmd}"
+                            DockPanel.Dock="Top"
+                            Margin="0,0,0,8"/>
+                    <DataGrid ItemsSource="{Binding Capitais}"
+                              AutoGenerateColumns="False"
+                              IsReadOnly="True"
+                              Height="200">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Município"
+                                                Binding="{Binding NomeDoMunicipio}"/>
+                            <DataGridTextColumn Header="UF"
+                                                Binding="{Binding Uf}"/>
+                            <DataGridTextColumn Header="População"
+                                                Binding="{Binding Populacao}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </DockPanel>
+            </GroupBox>
 
-    </Grid>
+            <!-- 4) Filtrar por população -->
+            <GroupBox Header="4) Filtrar Municípios por População" Margin="0,0,0,10">
+                <StackPanel Margin="8">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                        <TextBlock Text="Mínimo:" VerticalAlignment="Center" Margin="0,0,4,0"/>
+                        <TextBox Width="60"
+                                 Text="{Binding PopMin, UpdateSourceTrigger=PropertyChanged}"
+                                 Margin="0,0,8,0"/>
+                        <TextBlock Text="Máximo:" VerticalAlignment="Center" Margin="0,0,4,0"/>
+                        <TextBox Width="60"
+                                 Text="{Binding PopMax, UpdateSourceTrigger=PropertyChanged}"
+                                 Margin="0,0,8,0"/>
+                        <Button Content="Filtrar"
+                                Command="{Binding FiltrarPopCmd}"/>
+                        <TextBlock Text="Total:" VerticalAlignment="Center" Margin="16,0,4,0"/>
+                        <TextBlock Text="{Binding TotalFiltrados}"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <DataGrid ItemsSource="{Binding Filtrados}"
+                              AutoGenerateColumns="False"
+                              IsReadOnly="True"
+                              Height="200">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="UF"
+                                                Binding="{Binding Uf}"/>
+                            <DataGridTextColumn Header="Município"
+                                                Binding="{Binding Nome}"/>
+                            <DataGridTextColumn Header="População"
+                                                Binding="{Binding Populacao}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </GroupBox>
+
+            <!-- 5) Top-10 mais populosos NÃO capitais -->
+            <GroupBox Header="5) Top-10 NÃO Capitais" Margin="0,0,0,10">
+                <StackPanel Margin="8">
+                    <Button Content="Listar Top 10"
+                            Command="{Binding ListarTop10NaoCapitaisCmd}"
+                            Margin="0,0,0,8"/>
+                    <DataGrid ItemsSource="{Binding Top10NaoCapitais}"
+                              AutoGenerateColumns="False"
+                              IsReadOnly="True"
+                              Height="200">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="UF"
+                                                Binding="{Binding Uf}"/>
+                            <DataGridTextColumn Header="Município"
+                                                Binding="{Binding Nome}"/>
+                            <DataGridTextColumn Header="População"
+                                                Binding="{Binding Populacao}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </GroupBox>
+
+            <!-- 6) Estados cuja capital não é a mais populosa -->
+            <GroupBox Header="6) Estados c/ Cidade Mais Populosa que a Capital" Margin="0,0,0,10">
+                <StackPanel Margin="8">
+                    <Button Content="Listar Estados"
+                            Command="{Binding ListarEstadosMaiorQueCapitalCmd}"
+                            Margin="0,0,0,8"/>
+                    <DataGrid ItemsSource="{Binding EstadosComMaior}"
+                              AutoGenerateColumns="False"
+                              IsReadOnly="True"
+                              Height="200">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="UF"
+                                                Binding="{Binding Uf}"/>
+                            <DataGridTextColumn Header="Município"
+                                                Binding="{Binding Nome}"/>
+                            <DataGridTextColumn Header="População"
+                                                Binding="{Binding Populacao}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </GroupBox>
+
+        </StackPanel>
+    </ScrollViewer>
 </Window>

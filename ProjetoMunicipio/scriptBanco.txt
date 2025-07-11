@@ -1,0 +1,17 @@
+CREATE TABLE municipios_ibge (
+  uf                  CHAR(2),
+  cod_uf              INTEGER,
+  cod_munic           INTEGER,
+  nome_municipio      TEXT,
+  capital_estado      TEXT,
+  populacao           BIGINT
+);
+
+
+copy municipios_ibge(uf, cod_uf, cod_munic, nome_municipio, capital_estado, populacao)
+  FROM 'C:/temp/2022_IBGE -Municipios.csv'
+  WITH (
+    FORMAT csv,
+    HEADER true,
+    DELIMITER ';'
+  );

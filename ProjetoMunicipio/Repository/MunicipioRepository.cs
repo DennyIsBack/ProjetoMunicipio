@@ -12,7 +12,7 @@ namespace ProjetoMunicipio.Repository
         public Municipio BuscarPorNome(string nome) =>
             _dao.GetByName(nome);
 
-        public int PopulacaoTotalPorUf(string uf) =>
+        public long PopulacaoTotalPorUf(string uf) =>
             _dao.SumPopulacaoByUf(uf);
 
         public List<Municipio> ListarCapitais() =>

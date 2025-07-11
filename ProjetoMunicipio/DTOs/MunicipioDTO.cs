@@ -10,6 +10,6 @@ namespace ProjetoMunicipio.DTOs
     {
         public string Nome {  get; set; }
         public string Uf { get; set; }
-        public int Populacao { get; set; }
+        public long Populacao { get; set; }
     }
 }

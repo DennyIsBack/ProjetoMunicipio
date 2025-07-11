@@ -24,7 +24,7 @@ namespace ProjetoMunicipio.Services
         {
             return _repository.BuscarPorNome(nome);
         }
-        public int PopulacaoTotalPorUF(string uf)
+        public long PopulacaoTotalPorUF(string uf)
         {
             return _repository.PopulacaoTotalPorUf(uf);
         }

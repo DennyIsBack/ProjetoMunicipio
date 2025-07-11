@@ -10,10 +10,16 @@ namespace ProjetoMunicipio.Data
 
         public DbSet<Municipio> Municipios { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder opts)
+        {
+            opts.UseNpgsql(
+                "Host=localhost;Port=5432;Database=postgres;Username=postgres;Password=maxlow15"
+            );
+        }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Municipio>()
-                   .ToTable("municipio")
+                   .ToTable("municipios_ibge")
                    .HasKey(m => m.CodMunicipio);
 
             base.OnModelCreating(builder);
