@@ -2,8 +2,15 @@
 
 Aplicação desktop desenvolvida em C# com WPF que permite realizar consultas sobre municípios brasileiros.
 
+## 🎓 Projeto e Arquitetura de Software - Grupo 6
 
 
+Professor:
+- Marcos Eduardo Casa
+
+Alunos:
+- Gabriel Luppi Bilati
+- João Vitor Lemos Reis
 
 ## 💡 Funcionalidades
 
